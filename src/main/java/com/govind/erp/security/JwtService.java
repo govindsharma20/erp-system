@@ -33,4 +33,14 @@ public class JwtService {
                 .signWith(key)
                 .compact();
     }
+    public String extractUsername(
+            String token){
+
+        return Jwts.parser()
+            .verifyWith(key)
+            .build()
+            .parseSignedClaims(token)
+            .getPayload()
+            .getSubject();
+    }
 }
