@@ -13,14 +13,11 @@ import java.io.IOException;
 import java.util.Collections;
 
 @Component
-public class JwtAuthFilter
-        extends OncePerRequestFilter {
+public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
 
-    public JwtAuthFilter(
-            JwtService jwtService){
-
+    public JwtAuthFilter(JwtService jwtService) {
         this.jwtService = jwtService;
     }
 
@@ -31,14 +28,16 @@ public class JwtAuthFilter
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        String authHeader =
-                request.getHeader(
-                        "Authorization"
-                );
+        System.out.println("================================");
+        System.out.println("PATH = " + request.getRequestURI());
+        System.out.println("METHOD = " + request.getMethod());
+        System.out.println("================================");
 
-        if(authHeader == null
-                || !authHeader.startsWith(
-                "Bearer ")){
+        String authHeader =
+                request.getHeader("Authorization");
+
+        if (authHeader == null
+                || !authHeader.startsWith("Bearer ")) {
 
             filterChain.doFilter(
                     request,
