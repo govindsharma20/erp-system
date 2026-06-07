@@ -24,6 +24,7 @@ export default function LoginPage() {
       );
 
       alert("Login Successful!");
+      window.location.href = "/";
 
       console.log(response.data);
 

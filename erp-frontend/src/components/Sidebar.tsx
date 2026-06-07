@@ -1,12 +1,38 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Sidebar() {
+
+  const navigate = useNavigate();
+
   const items = [
-    "Dashboard",
-    "Employees",
-    "Inventory",
-    "Analytics",
-    "Users",
-    "Reports",
-    "Settings",
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+    },
+    {
+      name: "Employees",
+      path: "/employees",
+    },
+    {
+      name: "Inventory",
+      path: "/inventory",
+    },
+    {
+      name: "Analytics",
+      path: "/analytics",
+    },
+    {
+      name: "Users",
+      path: "/users",
+    },
+    {
+      name: "Reports",
+      path: "/reports",
+    },
+    {
+      name: "Settings",
+      path: "/settings",
+    },
   ];
 
   return (
@@ -17,15 +43,21 @@ export default function Sidebar() {
       </h1>
 
       <div className="space-y-3">
+
         {items.map((item) => (
+
           <button
-            key={item}
+            key={item.name}
+            onClick={() => navigate(item.path)}
             className="w-full text-left px-5 py-4 rounded-2xl bg-white/5 hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-purple-500/20 transition-all"
           >
-            {item}
+            {item.name}
           </button>
+
         ))}
+
       </div>
+
     </aside>
   );
 }

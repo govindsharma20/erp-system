@@ -1,4 +1,31 @@
+import { useEffect, useState } from "react";
+import api from "../services/api";
+
 export default function DashboardPage() {
+
+  const [employeeCount, setEmployeeCount] = useState(0);
+
+  useEffect(() => {
+
+    const fetchEmployees = async () => {
+
+      try {
+
+        const response = await api.get("/employees");
+
+        setEmployeeCount(response.data.length);
+
+      } catch (error) {
+
+        console.error("Error fetching employees:", error);
+
+      }
+    };
+
+    fetchEmployees();
+
+  }, []);
+
   return (
     <div>
 
@@ -26,6 +53,52 @@ export default function DashboardPage() {
         </div>
 
       </section>
+
+      {/* Stats Cards */}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div className="rounded-3xl border border-cyan-500/20 bg-cyan-500/5 p-6">
+          <p className="text-zinc-400 text-sm">
+            Total Employees
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3 text-cyan-400">
+            {employeeCount}
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-purple-500/20 bg-purple-500/5 p-6">
+          <p className="text-zinc-400 text-sm">
+            Departments
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3 text-purple-400">
+            4
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-green-500/20 bg-green-500/5 p-6">
+          <p className="text-zinc-400 text-sm">
+            Active Projects
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3 text-green-400">
+            12
+          </h2>
+        </div>
+
+        <div className="rounded-3xl border border-orange-500/20 bg-orange-500/5 p-6">
+          <p className="text-zinc-400 text-sm">
+            Monthly Revenue
+          </p>
+
+          <h2 className="text-5xl font-bold mt-3 text-orange-400">
+            ₹0
+          </h2>
+        </div>
+
+      </div>
 
     </div>
   );
